@@ -13,6 +13,8 @@ module "a_vcn" {
   source           = "./vcn"
   tenancy_ocid     = "${var.tenancy_ocid}"
   compartment_ocid = "${module.compartments.networks_id}"
+  application_compartment_ocid = "${module.compartments.application_id}"
+
   app_tag          = "${var.app_tag}"
   environment      = "${var.environment}"
   vcn_cidr         = "${var.vcn_cidr}"
