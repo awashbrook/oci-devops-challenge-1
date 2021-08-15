@@ -14,6 +14,7 @@ module "a_vcn" {
   tenancy_ocid     = "${var.tenancy_ocid}"
   compartment_ocid = "${module.compartments.networks_id}"
   application_compartment_ocid = "${module.compartments.application_id}"
+  bastion_compartment_ocid = "${module.compartments.bastion_id}"
 
   app_tag          = "${var.app_tag}"
   environment      = "${var.environment}"
