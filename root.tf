@@ -9,7 +9,7 @@ module "compartments" {
   }
 }
 
-module "a_vcn" {
+module "vcn" {
   source                       = "./vcn"
   tenancy_ocid                 = var.tenancy_ocid
   compartment_ocid             = module.compartments.networks_id
@@ -29,5 +29,20 @@ module "iam" {
 
   providers = {
     oci = oci.home
+  }
+}
+
+module "application" {
+  source                       = "./application"
+  instance_availability_domain = "BofS:UK-LONDON-1-AD-1"
+  instance_shape               = "VM.Standard.E2.1.Micro"
+  compartment_ocid             = module.compartments.application_id
+  subnet_id                    = module.vcn.application_private_subnet_id
+  image_ocid                   = var.image_id[var.region]
+  app_tag                      = var.app_tag
+  environment                  = var.environment
+
+  providers = {
+    oci = oci
   }
 }
