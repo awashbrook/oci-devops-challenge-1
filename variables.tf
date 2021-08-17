@@ -6,11 +6,8 @@ variable "image_id" {
   type = map(string)
   default = {
     // See https://docs.cloud.oracle.com/iaas/images/ 
-    // Oracle-provided image "Oracle-Linux-7.4-2018.02.21-1"
-    us-phoenix-1   = "ocid1.image.oc1.phx.aaaaaaaaapqrkiqsuj2yxoypb26z6k4wt47fhynnr36zyhdn6to26fd4l54q"
-    us-ashburn-1   = "ocid1.image.oc1.iad.aaaaaaaajlpkjb5lpw36fx2nsxmw7cxle2r5ox7wtj3wcgnvviih6p725jba"
-    eu-frankfurt-1 = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaayaoazkfukf2ug7adabq5nb2dmyu45s6zpwwky7pd5aegqepj45ba"
-    uk-london-1    = "ocid1.image.oc1.uk-london-1.aaaaaaaak2aelt2ihexd23lcfwq6fert3nbufv3tphgmpxeczdwmrgpcklga"
+    // Oracle-provided image "Oracle-Linux-7.9-2021.07.27-0"
+    uk-london-1    = "ocid1.image.oc1.uk-london-1.aaaaaaaa646hmq7yvlxk6wqhdzrljfxdy7iyy6wk7xtmdf3x73ko45nwqfsa"
   }
 }
 variable "private_key_path" {}
