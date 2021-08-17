@@ -9,5 +9,7 @@ resource "oci_core_instance" "app_server" {
   }
   create_vnic_details {
     subnet_id = var.subnet_id
+    assign_public_ip = "false" 
   }
+  # TODO public key
 }
