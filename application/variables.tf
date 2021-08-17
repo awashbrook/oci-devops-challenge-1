@@ -3,5 +3,7 @@ variable "compartment_ocid" {}
 variable "image_ocid" {}
 variable "instance_shape" {}
 variable "subnet_id" {}
+variable "public_key" {}
+variable "cloud_init" {}
 variable "app_tag" {}
 variable "environment" {}

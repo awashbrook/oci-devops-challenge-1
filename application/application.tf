@@ -11,5 +11,5 @@ resource "oci_core_instance" "app_server" {
     subnet_id = var.subnet_id
     assign_public_ip = "false" 
   }
-  # TODO public key
+  extended_metadata = { "ssh_authorized_keys" : var.public_key, "user_data" :  var.cloud_init }
 }

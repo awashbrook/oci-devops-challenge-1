@@ -38,9 +38,11 @@ module "application" {
   instance_shape               = "VM.Standard.E2.1.Micro"
   compartment_ocid             = module.compartments.application_id
   subnet_id                    = module.vcn.application_private_subnet_id
+  cloud_init                   = data.template_cloudinit_config.cloudinit-app-server.rendered
   image_ocid                   = var.image_id[var.region]
   app_tag                      = var.app_tag
   environment                  = var.environment
+  public_key                   = var.ssh_public_key
 
   providers = {
     oci = oci
