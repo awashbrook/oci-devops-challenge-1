@@ -1,7 +1,7 @@
 resource "oci_identity_policy" "iam_admin_managers" {
   name           = "IAMAdminManagers.pl"
   description    = "IAMAdminManagers.pl"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = var.tenancy_ocid
 
   statements = [
     "ALLOW GROUP ${oci_identity_group.iam_admin_managers.name} to read users IN TENANCY",
@@ -15,7 +15,7 @@ resource "oci_identity_policy" "iam_admin_managers" {
 resource "oci_identity_policy" "iam_managers" {
   name           = "IAMManagers.pl"
   description    = "IAMManagers.pl"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = var.tenancy_ocid
 
   statements = [
     "ALLOW GROUP ${oci_identity_group.iam_managers.name} to read users IN TENANCY",
@@ -28,7 +28,7 @@ resource "oci_identity_policy" "iam_managers" {
 resource "oci_identity_policy" "sys_admins" {
   name           = "SysAdmins.pl"
   description    = "SysAdmins.pl"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = var.tenancy_ocid
 
   statements = [
     "ALLOW GROUP ${oci_identity_group.sys_admins.name} to manage instance-family IN TENANCY where all {target.compartment.name=/*/, target.compartment.name!=/${var.app_tag}_${var.environment}_networks/}",
@@ -46,7 +46,7 @@ resource "oci_identity_policy" "sys_admins" {
 resource "oci_identity_policy" "storage_admins" {
   name           = "StorageAdmins.pl"
   description    = "StorageAdmins.pl"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = var.tenancy_ocid
 
   statements = [
     "ALLOW GROUP ${oci_identity_group.storage_admins.name} to manage object-family IN TENANCY",
@@ -58,7 +58,7 @@ resource "oci_identity_policy" "storage_admins" {
 resource "oci_identity_policy" "db_admins" {
   name           = "DBAdmins.pl"
   description    = "DBAdmins.pl"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = var.tenancy_ocid
 
   statements = [
     "ALLOW GROUP ${oci_identity_group.db_admins.name} manage database-family IN TENANCY",
@@ -69,7 +69,7 @@ resource "oci_identity_policy" "db_admins" {
 resource "oci_identity_policy" "network_admins" {
   name           = "NetworkAdmins.pl"
   description    = "NetworkAdmins.pl"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = var.tenancy_ocid
 
   statements = [
     "ALLOW GROUP ${oci_identity_group.network_admins.name} to manage vcns IN TENANCY",
@@ -91,7 +91,7 @@ resource "oci_identity_policy" "network_admins" {
 resource "oci_identity_policy" "net_sec_admins" {
   name           = "NetSecAdmins.pl"
   description    = "NetSecAdmins.pl"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = var.tenancy_ocid
 
   statements = [
     "ALLOW GROUP ${oci_identity_group.net_sec_admins.name} to manage security-lists IN TENANCY",
@@ -107,7 +107,7 @@ resource "oci_identity_policy" "net_sec_admins" {
 resource "oci_identity_policy" "read_only" {
   name           = "ReadOnly.pl"
   description    = "ReadOnly.pl"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = var.tenancy_ocid
 
   statements = ["ALLOW GROUP ${oci_identity_group.read_only.name} to read all-resources IN TENANCY"]
 }
