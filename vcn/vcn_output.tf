@@ -1,4 +1,4 @@
-output "vcnid" {
+output "vcn_id" {
   value = oci_core_virtual_network.base_vcn.id
 }
 output "default_dhcp_id" {

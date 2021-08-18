@@ -1,7 +1,7 @@
 resource "oci_core_instance" "app_server" {
   display_name        = "${var.app_tag}_${var.environment}_app_server"
   availability_domain = var.availability_domain
-  compartment_id      = var.compartment_ocid
+  compartment_id      = var.compartment_id
   shape               = var.shape
 
   source_details {

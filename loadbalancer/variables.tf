@@ -1,5 +1,4 @@
-variable "availability_domain" {}
-variable "compartment_ocid" {}
+variable "compartment_id" {}
 variable "shape" {}
 variable "subnet_id" {}
 variable "is_public_ip" {}

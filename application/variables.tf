@@ -1,5 +1,5 @@
 variable "availability_domain" {}
-variable "compartment_ocid" {}
+variable "compartment_id" {}
 variable "image_ocid" {}
 variable "shape" {}
 variable "subnet_id" {}

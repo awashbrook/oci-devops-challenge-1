@@ -1,9 +1,5 @@
-variable "instance_availability_domain" {}
-variable "compartment_ocid" {}
-variable "image_ocid" {}
-variable "shape" {}
-variable "subnet_id" {}
-variable "public_key" {}
-variable "cloud_init" {}
+variable "compartment_id" {}
+variable "vcn_id" {}
+variable "ingress_cidr_block" {}
 variable "app_tag" {}
 variable "environment" {}
