@@ -11,6 +11,15 @@ resource "oci_core_internet_gateway" "base_ig" {
   display_name   = "${var.app_tag}_${var.environment}_internetgateway"
 }
 
+# # Bastion public subnet 
+# resource "oci_core_subnet" "bastion_public" {
+#   vcn_id         = "${oci_core_virtual_network.base_vcn.id}"
+#   cidr_block     = "172.168.1.0/29"
+#   compartment_id = "${var.bastion_compartment_ocid}"
+#   availability_domain = ""
+#   display_name   = "${var.app_tag}_${var.environment}_public_subnet"  
+# }
+
 # Application Regional public subnet, with no domain
 resource "oci_core_subnet" "application_public" {
   vcn_id         = "${oci_core_virtual_network.base_vcn.id}"
