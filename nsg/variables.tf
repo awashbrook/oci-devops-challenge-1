@@ -1,10 +1,8 @@
-variable "availability_domain" {}
+variable "instance_availability_domain" {}
 variable "compartment_ocid" {}
 variable "image_ocid" {}
 variable "shape" {}
 variable "subnet_id" {}
-variable "is_public_ip" {}
-variable "network_security_group_ids" {}
 variable "public_key" {}
 variable "cloud_init" {}
 variable "app_tag" {}
