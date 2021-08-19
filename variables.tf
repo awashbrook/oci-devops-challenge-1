@@ -1,7 +1,19 @@
-variable "workstation_cidr" {}
 variable "tenancy_ocid" {}
 variable "user_ocid" {}
 variable "fingerprint" {}
+variable "private_key_path" {}
+variable "private_key_password" {}
+
+# Free Tier
+variable "loadbalancer_shape" {
+  default = "10Mbps-Micro"
+}
+variable "instance_shape" {
+  default = "VM.Standard.E2.1.Micro"
+}
+variable "instance_username" {
+  default = "opc"
+}
 variable "image_id" {
   type = map(string)
   default = {
@@ -10,16 +22,12 @@ variable "image_id" {
     uk-london-1 = "ocid1.image.oc1.uk-london-1.aaaaaaaa646hmq7yvlxk6wqhdzrljfxdy7iyy6wk7xtmdf3x73ko45nwqfsa"
   }
 }
-variable "private_key_path" {}
-variable "private_key_password" {}
-variable "instance_username" {
-  default = "opc"
-}
 variable "ssh_public_key" {}
 variable "app_tag" {}
 variable "environment" {}
 variable "home_region" {}
 variable "region" {}
-variable "vcn_cidr" {
-  default = "10.0.0.0/16"
+variable "availability_domain" {
+  default = "BofS:UK-LONDON-1-AD-1"
 }
+variable "workstation_cidr" {}

@@ -15,7 +15,7 @@ module "vcn" {
   bastion_compartment_id     = module.compartments.bastion_id
   app_tag                    = var.app_tag
   environment                = var.environment
-  vcn_cidr                   = var.vcn_cidr
+  vcn_cidr                   = "10.0.0.0/16"
 }
 module "iam" {
   source       = "./iam"
@@ -39,12 +39,12 @@ module "nsg" {
 }
 module "loadbalancer" {
   source                     = "./loadbalancer"
-  shape                      = "10Mbps-Micro" # Free Tier
+  is_public_ip               = "true"
   compartment_id             = module.compartments.application_id
   subnet_id                  = module.vcn.application_public_subnet_id
   network_security_group_ids = [module.nsg.application_load_balancer_public_dmz_nsg_id]
-  is_public_ip               = "true"
   backend_ip_address         = module.application.instance_private_ip
+  shape                      = var.loadbalancer_shape
   app_tag                    = var.app_tag
   environment                = var.environment
   providers = {
@@ -53,12 +53,12 @@ module "loadbalancer" {
 }
 module "application" {
   source                     = "./application"
-  availability_domain        = "BofS:UK-LONDON-1-AD-1"
-  shape                      = "VM.Standard.E2.1.Micro" # Free Tier
+  is_public_ip               = "false"
+  availability_domain        = var.availability_domain
+  shape                      = var.instance_shape
   compartment_id             = module.compartments.application_id
   subnet_id                  = module.vcn.application_private_subnet_id
   network_security_group_ids = [module.nsg.application_public_application_app_server_private_nsg_id]
-  is_public_ip               = "false"
   cloud_init                 = data.template_cloudinit_config.cloudinit-app-server.rendered
   image_ocid                 = var.image_id[var.region]
   public_key                 = var.ssh_public_key
