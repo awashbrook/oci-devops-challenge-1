@@ -37,7 +37,7 @@ module "iam" {
 module "nsg" {
   source             = "./nsg"
   compartment_id     = module.compartments.application_id
-  vcn_id             = module.vcn_application.vcn_id
+  vcn_id             = module.vcn.vcn_id
   ingress_cidr_block = var.workstation_cidr
   app_tag            = var.app_tag
   environment        = var.environment

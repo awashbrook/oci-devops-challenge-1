@@ -1,4 +1,4 @@
- resource "oci_core_virtual_network" "base_vcn" {
+resource "oci_core_virtual_network" "base_vcn" {
   cidr_block     = var.vcn_cidr
   compartment_id = var.network_compartment_id
   dns_label      = lower(format("%s", var.app_tag))
