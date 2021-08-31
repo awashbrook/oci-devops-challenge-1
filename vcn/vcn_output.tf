@@ -7,9 +7,9 @@ output "default_dhcp_id" {
 output "internet_gateway_id" {
   value = oci_core_internet_gateway.base_ig.id
 }
-output "application_public_subnet_id" {
-  value = oci_core_subnet.application_public.id
+output "public_subnet_id" {
+  value = oci_core_subnet.public.id
 }
-output "application_private_subnet_id" {
-  value = oci_core_subnet.application_private.id
+output "private_subnet_id" {
+  value = oci_core_subnet.private.id
 }
