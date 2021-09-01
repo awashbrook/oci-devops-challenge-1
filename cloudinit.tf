@@ -1,7 +1,7 @@
 data "template_file" "init-script" {
   template = file("scripts/init.cfg")
   vars = {
-    region = var.region
+    region = var.oci_devops_general.region
   }
 }
 
