@@ -13,7 +13,7 @@ module "vcn_bastion" {
   network_compartment_id = module.compartments.networks_id
   app_tag                = var.app_tag
   environment            = var.environment
-  vcn_cidr               = "172.168.0.0/16"
+  vcn_cidr               = var.vcn_cidr_bastion
 }
 module "vcn_application" {
   source                 = "./vcn"
@@ -21,15 +21,16 @@ module "vcn_application" {
   network_compartment_id = module.compartments.networks_id
   app_tag                = var.app_tag
   environment            = var.environment
-  vcn_cidr               = "10.0.0.0/16"
+  vcn_cidr               = var.vcn_cidr_application
 }
 module "subnets_application" {
   source         = "./subnets"
   vcn_id         = module.vcn_application.vcn_id
   compartment_id = module.compartments.application_id
+  vcn_cidr       = var.vcn_cidr_application
+  newbits        = 8
   app_tag        = var.app_tag
   environment    = var.environment
-  # TODO CIDR
 }
 module "iam" {
   source       = "./iam"

@@ -30,4 +30,10 @@ variable "region" {}
 variable "availability_domain" {
   default = "BofS:UK-LONDON-1-AD-1"
 }
+variable "vcn_cidr_application" {
+  default = "10.0.0.0/16"
+}
+variable "vcn_cidr_bastion" {
+  default = "172.168.0.0/16"
+}
 variable "workstation_cidr" {}
