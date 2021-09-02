@@ -15,9 +15,6 @@ variable "oci_devops_general" {
     region      = string
     app_tag     = string
     environment = string
-    # TODO Consolidate
-    label_prefix   = string
-    compartment_id = string
   })
   description = "general oci parameters"
 }
@@ -70,6 +67,7 @@ variable "oci_devops_bastion" {
     ssh_private_key_path             = string
     ssh_public_key                   = string
     ssh_public_key_path              = string
+    label_prefix                     = string
     tags                             = map(any)
     timezone                         = string
   })
@@ -87,8 +85,9 @@ variable "oci_devops_bastion" {
       memory           = 4,
       boot_volume_size = 50
     }
-    bastion_state         = "RUNNING"
-    bastion_upgrade       = true
+    bastion_state   = "RUNNING"
+    bastion_upgrade = true
+
     netnum                = 0
     newbits               = 14
     notification_enabled  = false
@@ -98,6 +97,7 @@ variable "oci_devops_bastion" {
     ssh_private_key_path  = ""
     ssh_public_key        = ""
     ssh_public_key_path   = ""
+    label_prefix          = ""
     tags = {
       role = "bastion"
     }

@@ -95,8 +95,7 @@ module "bastion" {
   user_id              = var.oci_devops_provider.user_id
 
   # general oci parameters
-  compartment_id = var.oci_devops_general.compartment_id 
-  label_prefix   = var.oci_devops_general.label_prefix
+  compartment_id = module.compartments.bastion_id
 
   # network parameters
   availability_domain = var.oci_devops_bastion.availability_domain
@@ -124,9 +123,10 @@ module "bastion" {
   notification_topic    = var.oci_devops_bastion.notification_topic
 
   # tags
-  tags = var.oci_devops_bastion.tags
+  label_prefix = var.oci_devops_bastion.label_prefix
+  tags         = var.oci_devops_bastion.tags
 
-  # providers = {
-  #   oci = oci
-  # }
+  providers = {
+    oci = oci
+  }
 }
