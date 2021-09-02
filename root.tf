@@ -1,6 +1,6 @@
 module "compartments" {
   source       = "./compartments"
-  tenancy_ocid = var.oci_devops_provider.tenancy_ocid
+  tenancy_ocid = var.oci_devops_provider.tenancy_id
   app_tag      = var.oci_devops_general.app_tag
   environment  = var.oci_devops_general.environment
   providers = {
@@ -9,7 +9,7 @@ module "compartments" {
 }
 module "vcn_bastion" {
   source                 = "./vcn"
-  tenancy_ocid           = var.oci_devops_provider.tenancy_ocid
+  tenancy_ocid           = var.oci_devops_provider.tenancy_id
   network_compartment_id = module.compartments.networks_id
   app_tag                = var.oci_devops_general.app_tag
   environment            = var.oci_devops_general.environment
@@ -17,7 +17,7 @@ module "vcn_bastion" {
 }
 module "vcn_application" {
   source                 = "./vcn"
-  tenancy_ocid           = var.oci_devops_provider.tenancy_ocid
+  tenancy_ocid           = var.oci_devops_provider.tenancy_id
   network_compartment_id = module.compartments.networks_id
   app_tag                = var.oci_devops_general.app_tag
   environment            = var.oci_devops_general.environment
@@ -34,7 +34,7 @@ module "subnets_application" {
 }
 module "iam" {
   source       = "./iam"
-  tenancy_ocid = var.oci_devops_provider.tenancy_ocid
+  tenancy_ocid = var.oci_devops_provider.tenancy_id
   app_tag      = var.oci_devops_general.app_tag
   environment  = var.oci_devops_general.environment
   providers = {
@@ -95,7 +95,7 @@ module "bastion" {
   user_id              = var.oci_devops_provider.user_id
 
   # general oci parameters
-  compartment_id = var.oci_devops_general.compartment_id
+  compartment_id = var.oci_devops_general.compartment_id 
   label_prefix   = var.oci_devops_general.label_prefix
 
   # network parameters
@@ -125,4 +125,8 @@ module "bastion" {
 
   # tags
   tags = var.oci_devops_bastion.tags
+
+  # providers = {
+  #   oci = oci
+  # }
 }

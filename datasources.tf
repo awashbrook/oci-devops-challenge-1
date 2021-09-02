@@ -1,5 +1,5 @@
 data "oci_identity_availability_domains" "ad" {
-  compartment_id = var.tenancy_ocid
+  compartment_id = var.oci_devops_provider.tenancy_id
 }
 
 data "template_file" "ad_names" {

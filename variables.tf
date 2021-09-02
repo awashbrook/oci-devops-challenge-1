@@ -1,10 +1,11 @@
 variable "oci_devops_provider" {
   type = object({
-    api_fingerprint      = string
-    api_private_key_path = string
-    region               = string
-    tenancy_id           = string
-    user_id              = string
+    api_fingerprint          = string
+    api_private_key_path     = string
+    api_private_key_password = string
+    region                   = string
+    tenancy_id               = string
+    user_id                  = string
   })
   description = "oci provider parameters"
 }
