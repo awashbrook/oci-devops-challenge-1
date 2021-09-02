@@ -99,13 +99,12 @@ module "bastion" {
   label_prefix   = var.oci_devops_general.label_prefix
 
   # network parameters
-
   availability_domain = var.oci_devops_bastion.availability_domain
   bastion_access      = var.oci_devops_bastion.bastion_access
-  ig_route_id         = module.vcn.ig_route_id
+  ig_route_id         = module.vcn_bastion.internet_gateway_id
   netnum              = var.oci_devops_bastion.netnum
   newbits             = var.oci_devops_bastion.newbits
-  vcn_id              = module.vcn.vcn_id
+  vcn_id              = module.vcn_bastion.vcn_id
 
   # bastion parameters
   bastion_enabled                  = var.oci_devops_bastion.bastion_enabled
