@@ -10,3 +10,9 @@ resource "oci_core_internet_gateway" "vcn_ig" {
   compartment_id = var.network_compartment_id
   display_name   = "${var.app_tag}_${var.environment}_internetgateway"
 }
+
+resource "oci_core_local_peering_gateway" "vcn_lpg" {
+  vcn_id         = oci_core_virtual_network.vcn.id
+  compartment_id = var.network_compartment_id
+  display_name   = "${var.app_tag}_${var.environment}_localpeeringgateway"
+}
