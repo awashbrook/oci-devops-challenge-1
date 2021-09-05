@@ -7,14 +7,6 @@ module "compartments" {
     oci = oci.home
   }
 }
-module "vcn_bastion" {
-  source                 = "./vcn"
-  tenancy_ocid           = var.oci_devops_provider.tenancy_id
-  network_compartment_id = module.compartments.networks_id
-  app_tag                = var.oci_devops_general.app_tag
-  environment            = var.oci_devops_general.environment
-  vcn_cidr               = var.vcn_cidr_bastion
-}
 module "vcn_application" {
   source                 = "./vcn"
   tenancy_ocid           = var.oci_devops_provider.tenancy_id
@@ -100,13 +92,13 @@ module "bastion" {
   # network parameters
   availability_domain = var.oci_devops_bastion.availability_domain
   bastion_access      = var.oci_devops_bastion.bastion_access
-  ig_route_id         = module.vcn_bastion.internet_gateway_id
+  ig_route_id         = module.vcn_application.internet_gateway_id
   netnum              = var.oci_devops_bastion.netnum
   newbits             = var.oci_devops_bastion.newbits
-  vcn_id              = module.vcn_bastion.vcn_id
+  vcn_id              = module.vcn_application.vcn_id
 
   # bastion parameters
-  bastion_enabled                  = var.oci_devops_bastion.bastion_enabled
+  bastion_enabled                  = false
   bastion_image_id                 = var.oci_devops_bastion.bastion_image_id
   bastion_operating_system_version = var.oci_devops_bastion.bastion_operating_system_version
   bastion_shape                    = var.oci_devops_bastion.bastion_shape
