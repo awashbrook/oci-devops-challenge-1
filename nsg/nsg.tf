@@ -37,3 +37,19 @@ resource "oci_core_network_security_group_security_rule" "application_app_server
     }
   }
 }
+resource "oci_core_network_security_group_security_rule" "application_app_server_bastion_ingress" {
+  network_security_group_id = oci_core_network_security_group.application_app_server_private_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6" # TCP
+  description               = "Bastion admin ingress from public internet into application compartment"
+  source                    = "172.168.0.0/16"
+  source_type               = "CIDR_BLOCK"
+  tcp_options {
+    source_port_range {
+      max = 22
+      min = 22
+    }
+  }
+}
+
+
