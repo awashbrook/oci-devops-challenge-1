@@ -19,19 +19,38 @@ resource "oci_core_local_peering_gateway" "vcn_lpg" {
 
 resource "oci_core_default_security_list" "peering-vcns" {
   manage_default_resource_id = oci_core_virtual_network.vcn.default_security_list_id
-  # TODO Kill this if this isnt default egress rules
+  # Default open egress rule everywhere 
   egress_security_rules {
     protocol    = var.all_protocols
     destination = var.anywhere
   }
-  # Allow ssh ingress from Bastion
+  # Allow ssh ingress from Bastion VN
   ingress_security_rules {
     protocol    = var.tcp_protocol
-    description = "Bastion admin ingress from public internet into application compartment"
+    description = "Allow administration from Bastion VCN only"
     source      = var.bastion_vcn_cidr
     tcp_options {
       min = var.ssh_port
       max = var.ssh_port
     }
+  }
+  # ingress_security_rules {
+  #   protocol    = var.tcp_protocol
+  #   description = "Allow administration from anywhere from the public internet"
+  #   source      = var.anywhere
+  #   tcp_options {
+  #     min = var.ssh_port
+  #     max = var.ssh_port
+  #   }
+  # }
+  ingress_security_rules {
+    protocol    = var.icmp_protocol
+    description = "Anybody can ping from the public internet"
+    source      = var.anywhere
+  }
+  ingress_security_rules {
+    protocol    = var.icmp_protocol
+    description = "Anybody can ping from the application VCN "
+    source      = var.vcn_cidr
   }
 }

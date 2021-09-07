@@ -7,5 +7,4 @@ variable "is_public_ip" {}
 variable "network_security_group_ids" {}
 variable "public_key" {}
 variable "cloud_init" {}
-variable "app_tag" {}
-variable "environment" {}
+variable "display_name" {}

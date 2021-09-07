@@ -24,7 +24,9 @@ variable "loadbalancer_shape" {
 }
 variable "instance_shape" {
   default = "VM.Standard.E2.1.Micro"
+  # default = "VM.Standard.E2.2" # Not Free Tier
 }
+
 variable "instance_username" {
   default = "opc"
 }

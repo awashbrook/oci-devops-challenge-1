@@ -58,19 +58,34 @@ module "loadbalancer" {
     oci = oci
   }
 }
+module "jump_box" {
+  source                     = "./instance" # TODO Rename
+  is_public_ip               = "true"
+  availability_domain        = var.availability_domain
+  shape                      = "VM.Standard.E2.2" # Not Free Tier
+  subnet_id                  = module.subnets_application.public_subnet_id
+  compartment_id             = module.compartments.application_id
+  network_security_group_ids = [module.nsg.application_jump_box_public_dmz_nsg_id]
+  cloud_init                 = data.template_cloudinit_config.cloudinit-app-server.rendered
+  image_ocid                 = var.image_id[var.oci_devops_general.region]
+  public_key                 = var.ssh_public_key
+  display_name               = "${var.oci_devops_general.app_tag}_${var.oci_devops_general.environment}_jump_box"
+  providers = {
+    oci = oci
+  }
+}
 module "application" {
-  source                     = "./application"
+  source                     = "./instance"
   is_public_ip               = "false"
   availability_domain        = var.availability_domain
   shape                      = var.instance_shape
   compartment_id             = module.compartments.application_id
   subnet_id                  = module.subnets_application.private_subnet_id
-  network_security_group_ids = [module.nsg.application_public_application_app_server_private_nsg_id]
+  network_security_group_ids = [module.nsg.application_app_server_private_nsg_id]
   cloud_init                 = data.template_cloudinit_config.cloudinit-app-server.rendered
   image_ocid                 = var.image_id[var.oci_devops_general.region]
   public_key                 = var.ssh_public_key
-  app_tag                    = var.oci_devops_general.app_tag
-  environment                = var.oci_devops_general.environment
+  display_name               = "${var.oci_devops_general.app_tag}_${var.oci_devops_general.environment}_app_server"
   providers = {
     oci = oci
   }
